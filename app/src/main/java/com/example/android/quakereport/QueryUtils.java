@@ -6,6 +6,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -58,17 +59,20 @@ public final class QueryUtils {
             for (int i=0;i<features.length();i++) {
                 JSONObject currentEarthquake = features.getJSONObject(i);
                 JSONObject properties = currentEarthquake.getJSONObject("properties");
-                String magnitude = properties.getString("mag");
+                double magnitude = properties.getDouble("mag");
                 String location = properties.getString("place");
                 long timeInMilliSecond = properties.getLong("time");
 
                 Date dateObject = new Date(timeInMilliSecond);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("LLL DD,YYYY");
                 SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-                String formatedDate = dateFormat.format(dateObject);
-                String formatedTime = timeFormat.format(dateObject);
+                String formattedDate = dateFormat.format(dateObject);
+                String formattedTime = timeFormat.format(dateObject);
 
-                Earthquake earthquake = new Earthquake(magnitude,location,formatedDate,formatedTime);
+                DecimalFormat formatMagnitude = new DecimalFormat("0.0");
+                String formattedMagnitude = formatMagnitude.format(magnitude);
+
+                Earthquake earthquake = new Earthquake(formattedMagnitude,location,formattedDate,formattedTime);
                 earthquakes.add(earthquake);
             }
 

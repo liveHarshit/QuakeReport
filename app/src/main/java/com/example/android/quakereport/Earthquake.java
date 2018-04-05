@@ -17,7 +17,7 @@ public class Earthquake {
         mTime = time;
     }
 
-    public String  getMagnitude () {return mMagnitude;}
+    public String getMagnitude () {return mMagnitude;}
     public String getLocation () {return mLocation;}
     public String getDate () {return mDate;}
     public String getTime() {return mTime;}
