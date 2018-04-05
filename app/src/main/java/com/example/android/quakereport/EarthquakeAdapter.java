@@ -36,6 +36,9 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         TextView dateView = (TextView)listItemView.findViewById(R.id.date);
         dateView.setText(currentEarthquake.getDate());
 
+        TextView timeView = (TextView)listItemView.findViewById(R.id.time);
+        timeView.setText(currentEarthquake.getTime());
+
         return listItemView;
     }
 

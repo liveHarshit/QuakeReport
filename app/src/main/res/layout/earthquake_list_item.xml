@@ -10,20 +10,29 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/magnitude"
-        tools:text="4.7" />
+        tools:text="4.7"
+        android:padding="16dp"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:id="@+id/location"
-        tools:text="India"/>
+        tools:text="India"
+        android:padding="16dp"/>
 
     <TextView
+        android:id="@+id/date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:id="@+id/date"
-        android:text="26-Nov-2016"/>
+        tools:text="Mar 6, 2010" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:text="3:00 PM" />
 
 </LinearLayout>
