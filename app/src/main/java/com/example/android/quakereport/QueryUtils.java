@@ -62,6 +62,7 @@ public final class QueryUtils {
                 double magnitude = properties.getDouble("mag");
                 String location = properties.getString("place");
                 long timeInMilliSecond = properties.getLong("time");
+                String url = properties.getString("url");
 
                 Date dateObject = new Date(timeInMilliSecond);
                 SimpleDateFormat dateFormat = new SimpleDateFormat("LLL DD,YYYY");
@@ -72,7 +73,7 @@ public final class QueryUtils {
                 DecimalFormat formatMagnitude = new DecimalFormat("0.0");
                 String formattedMagnitude = formatMagnitude.format(magnitude);
 
-                Earthquake earthquake = new Earthquake(formattedMagnitude,location,formattedDate,formattedTime);
+                Earthquake earthquake = new Earthquake(formattedMagnitude,location,formattedDate,formattedTime,url);
                 earthquakes.add(earthquake);
             }
 
