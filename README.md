@@ -8,4 +8,4 @@ from the U.S. Geological Survey (USGS) organization. And provide intent to your 
 Used API:[USGS](https://earthquake.usgs.gov/)
 
 Screenshot of Activity:
-![Screenshot](https://github.com/liveHarshit/QuakeReport/blob/master/screenshot.png)
+![Screenshot](https://github.com/liveHarshit/QuakeReport/blob/starting-point/screenshot.png)
