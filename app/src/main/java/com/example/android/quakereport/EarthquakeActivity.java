@@ -15,6 +15,7 @@
  */
 package com.example.android.quakereport;
 
+import android.app.LoaderManager;
 import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.net.Uri;
@@ -29,14 +30,19 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
+import android.app.LoaderManager;
+import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Loader;
 
-public class EarthquakeActivity extends AppCompatActivity {
+public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Earthquake>> {
 
     public static final String LOG_TAG = EarthquakeActivity.class.getName();
 
     private static final String USGS_REQUEST_URL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5&limit=10";
     private EarthquakeAdapter mAdapter;
 
+    public static final int EARTHQUAKE_LOADER_ID = 1;
 
 
 
@@ -44,6 +50,9 @@ public class EarthquakeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.earthquake_activity);
+
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.initLoader(EARTHQUAKE_LOADER_ID,null,this);
 
         /*// Create a fake list of earthquake locations.
         ArrayList<Earthquake> earthquakes = QueryUtils.extractEarthquakes();*/
@@ -72,10 +81,29 @@ public class EarthquakeActivity extends AppCompatActivity {
             }
         });
 
-        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-        task.execute(USGS_REQUEST_URL);
+        /*EarthquakeAsyncTask task = new EarthquakeAsyncTask();
+        task.execute(USGS_REQUEST_URL);*/
     }
-    private class EarthquakeAsyncTask extends AsyncTask<String,Void,ArrayList<Earthquake>> {
+
+    @Override
+    public Loader<ArrayList<Earthquake>> onCreateLoader(int i, Bundle bundle) {
+        return new EarthQuakeLoader(this,USGS_REQUEST_URL);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<ArrayList<Earthquake>> loader, ArrayList<Earthquake> earthquakes) {
+        mAdapter.clear();
+        if(earthquakes!=null && !earthquakes.isEmpty()) {
+            mAdapter.addAll(earthquakes);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<ArrayList<Earthquake>> loader) {
+        mAdapter.clear();
+    }
+
+    /*private class EarthquakeAsyncTask extends AsyncTask<String,Void,ArrayList<Earthquake>> {
 
         @Override
         protected ArrayList<Earthquake> doInBackground(String... strings) {
@@ -94,5 +122,5 @@ public class EarthquakeActivity extends AppCompatActivity {
             }
 
         }
-    }
+    }*/
 }
