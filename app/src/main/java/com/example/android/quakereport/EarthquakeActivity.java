@@ -34,6 +34,7 @@ import java.util.List;
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Loader;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class EarthquakeActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<ArrayList<Earthquake>> {
@@ -63,9 +64,9 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
         mAdapter = new EarthquakeAdapter(this, new ArrayList<Earthquake>());
 
-        TextView emptyTextView = (TextView)findViewById(R.id.empty_view);
-        emptyTextView.setText(R.string.no_earthquakes);
-        earthquakeListView.setEmptyView(emptyTextView);
+
+
+
 
         /*// Create a new {@link ArrayAdapter} of earthquakes
         final EarthquakeAdapter adapter= new EarthquakeAdapter(this,earthquakes);*/
@@ -97,6 +98,12 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
 
     @Override
     public void onLoadFinished(Loader<ArrayList<Earthquake>> loader, ArrayList<Earthquake> earthquakes) {
+        ProgressBar loadingSpinner = (ProgressBar)findViewById(R.id.loading_spinner);
+        loadingSpinner.setVisibility(View.GONE);
+        TextView emptyTextView = (TextView)findViewById(R.id.empty_view);
+        emptyTextView.setText(R.string.no_earthquakes);
+        ListView earthquakeListView = (ListView) findViewById(R.id.list);
+        earthquakeListView.setEmptyView(emptyTextView);
         mAdapter.clear();
         if(earthquakes!=null && !earthquakes.isEmpty()) {
            mAdapter.addAll(earthquakes);

@@ -33,10 +33,15 @@ public final class QueryUtils {
 
     }
 
-    public static ArrayList<Earthquake> fetchEarthquakeData (String reuestUrl) {
+    public static ArrayList<Earthquake> fetchEarthquakeData (String reuestUrl) { try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         URL url = createUrl(reuestUrl);
         String jsonResponse = null;
         try {
+
             jsonResponse = makeHTTPrequest(url);
         } catch (IOException e) {
             Log.e("","Failed to make HTTP request");
