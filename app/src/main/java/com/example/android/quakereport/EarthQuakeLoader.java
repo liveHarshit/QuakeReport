@@ -3,7 +3,7 @@ package com.example.android.quakereport;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+import android.content.AsyncTaskLoader;
 
 public class EarthQuakeLoader extends AsyncTaskLoader<ArrayList<Earthquake>> {
 
