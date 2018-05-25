@@ -27,6 +27,8 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.util.EventLog;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -129,24 +131,20 @@ public class EarthquakeActivity extends AppCompatActivity implements LoaderManag
         mAdapter.clear();
     }
 
-    /*private class EarthquakeAsyncTask extends AsyncTask<String,Void,ArrayList<Earthquake>> {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return true;
+    }
 
-        @Override
-        protected ArrayList<Earthquake> doInBackground(String... strings) {
-            if(strings.length<1 || strings==null){
-                return null;
-            }
-            ArrayList<Earthquake> arrayList = QueryUtils.fetchEarthquakeData(strings[0]);
-            return arrayList;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(EarthquakeActivity.this,SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
         }
-
-        @Override
-        protected void onPostExecute(ArrayList<Earthquake> data) {
-            mAdapter.clear();
-            if(data!=null && !data.isEmpty()) {
-                mAdapter.addAll(data);
-            }
-
-        }
-    }*/
+        return super.onOptionsItemSelected(item);
+    }
 }
